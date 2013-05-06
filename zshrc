@@ -2,11 +2,6 @@
 # Tips 
 # http://www.rayninfo.co.uk/tips/zshtips.html
 
-
-
-
-
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 

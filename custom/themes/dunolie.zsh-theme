@@ -32,6 +32,18 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[green]%})%{$reset_color%}"
 # the prompt ’%10<...<%~%<<%# ’ will print a truncated representation of the current directory, followed by a ‘%’ or ‘#’, followed by a space. Without the ‘%<<’, those two characters would be included in the string to be truncated
 
 #-----------------------------------------
+# Example : check if your on a mac laptop  and then load battery script
+#-----------------------------------------
+function laptop_battery () {
+if [ ! "$(pmset -g | grep Battery)" -eq 1 ]; then
+		echo ""
+	else
+		#echo "$(BAT_CHARGE)" 2>/dev/null
+		echo "$(~/bin/batcharge.py)" 2>/dev/null
+fi
+}
+
+#-----------------------------------------
 # Example : With [user@host] for ssh connection
 #-----------------------------------------
 function ssh_connection() {
@@ -40,7 +52,7 @@ function ssh_connection() {
   fi
 }
 PROMPT='%{$fg[magenta]%}[%h][%T]'$(ssh_connection)' %{$reset_color%}%{$fg[green]%}%20<➥<%~%<< %{$reset_color%}%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%})'
-RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)'
+RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)$(laptop_battery)'
 #-----------------------------------------
 # Example : Colored prompt for root
 #-----------------------------------------
