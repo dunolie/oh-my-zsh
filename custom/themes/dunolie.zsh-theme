@@ -1,11 +1,10 @@
+#zsh prompt
+# dunolie.zshtheme
+# dunolie @ gmail * com
 
-
-#ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}"
-#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}⚡%{$reset_color%}"
-#ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-#PROMPT='%{$fg[magenta]%}%n%{$reset_color%}%{$fg[cyan]%}@%{$reset_color%}%{$fg[yellow]%}%m%{$reset_color%}%{$fg[red]%}:%{$reset_color%}%{$fg[cyan]%}%0~%{$reset_color%}%{$fg[red]%}|%{$reset_color%}$(git_prompt_info)%{$fg[cyan]%}⇒%{$reset_color%}  '
+# Credit to all those I've taken snips from :)
+# colored exit: http://www.lowlevelmanager.com/2012/03/smile-zsh-prompt-happysad-face.html
+# battery: https://gist.github.com/gworley3/3136888
 
 
 #COLOURED_RETURN_VAL="%(▪▶$fg{green}$fg{red})▪▶"
@@ -20,39 +19,64 @@ ZSH_THEME_GIT_PROMPT_AHEAD="▶"
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[green]%})%{$reset_color%}"
-#PROMPT='%{$fg[magenta]%}[%h][%T][%n@%m] %{$reset_color%}%{$fg[green]%}%c %{$reset_color%}$(git_prompt_info)%{$fg[cyan]%}▶%{$reset_color%}'
-
-# With colored exit. http://www.lowlevelmanager.com/2012/03/smile-zsh-prompt-happysad-face.html
-#PROMPT='%{$fg[magenta]%}[%h][%T][%n@%m] %{$reset_color%}%{$fg[green]%}%15<..<%~%<< %{$reset_color%}$(git_prompt_info)%(?,%{$fg[cyan]%}▶%{$reset_color%},%{$fg[red]%}▶%{$reset_color%})'
-
-
-
-#PROMPT='%{$fg[magenta]%}[%h][%T] %{$reset_color%}%{$fg[green]%}%15<➥<%~%<< %{$reset_color%}$(git_prompt_info)%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%})'
-#RPROMPT='$(git_prompt_info)'
-# the prompt ’%10<...<%~%<<%# ’ will print a truncated representation of the current directory, followed by a ‘%’ or ‘#’, followed by a space. Without the ‘%<<’, those two characters would be included in the string to be truncated
-
-#-----------------------------------------
-# Example : check if your on a mac laptop  and then load battery script
-#-----------------------------------------
-function laptop_battery () {
-if [ ! "$(pmset -g | grep Battery)" -eq 1 ]; then
-		echo ""
-	else
-		#echo "$(BAT_CHARGE)" 2>/dev/null
-		echo "$(~/bin/batcharge.py)" 2>/dev/null
-fi
-}
 
 #-----------------------------------------
 # Example : With [user@host] for ssh connection
 #-----------------------------------------
 function ssh_connection() {
   if [[ -n $SSH_CONNECTION ]]; then
-    echo "%{$fg[megenta]%}[%n@%m] "
+    echo "%{$fg[megenta]%}[%n@%m]"
   fi
 }
+
+#-----------------------------------------
+# Example : check if your on a mac laptop  and then load battery script
+#-----------------------------------------
+
+function laptop_battery () {
+lappy="$(system_profiler SPPowerDataType | grep "Battery Installed: Yes")"
+if [[ -z "$lappy" ]]; then
+	echo ""
+else
+	#use this RPROMPT for a laptop (with the battery script)
+    echo $(CUTE_BATTERY_INDICATOR=1 ~/bin/battery Discharging;CUTE_BATTERY_INDICATOR=1 ~/bin/battery Charging);
+	
+fi
+}
+
+#-----------------------------------------
+
 PROMPT='%{$fg[magenta]%}[%h][%T]'$(ssh_connection)' %{$reset_color%}%{$fg[green]%}%20<➥<%~%<< %{$reset_color%}%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%})'
-RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)$(laptop_battery)'
+RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)%{$fg[magenta]%}$(laptop_battery)%{$reset_color%}'
+
+#-----------------------------------------
+# Example : check if your on a mac laptop  and then load battery script
+#-----------------------------------------
+#function laptop_battery () {
+#if [ ! "$(pmset -g | grep Battery)" -eq 1 ]; then
+#		echo ""
+#	else
+#		#echo "$(BAT_CHARGE)" 2>/dev/null
+#		echo "$(~/bin/batcharge.py)" 2>/dev/null
+#fi
+#}
+#function laptop_battery () {
+#	echo "$(~/bin/batcharge)" 2>/dev/null
+#}
+#
+#function laptop_battery () {
+#	echo $(CUTE_BATTERY_INDICATOR=1 ~/bin/battery Discharging;CUTE_BATTERY_INDICATOR=1 ~/bin/battery Charging)
+	#}
+#-----------------------------------------
+# Example : With [user@host] for ssh connection
+#-----------------------------------------
+#function ssh_connection() {
+#  if [[ -n $SSH_CONNECTION ]]; then
+#    echo "%{$fg[megenta]%}[%n@%m]"
+#  fi
+  #}
+#PROMPT='%{$fg[magenta]%}[%h][%T]'$(ssh_connection)' %{$reset_color%}%{$fg[green]%}%20<➥<%~%<< %{$reset_color%}%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%}) '
+#RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)%{$fg[magenta]%}$(laptop_battery)%{$reset_color%}'
 #-----------------------------------------
 # Example : Colored prompt for root
 #-----------------------------------------
@@ -114,3 +138,14 @@ RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)$(laptop_battery)'
 #-----------------------------------------
 # Testing
 #-----------------------------------------
+#PROMPT='%{$fg[magenta]%}[%h][%T][%n@%m] %{$reset_color%}%{$fg[green]%}%c %{$reset_color%}$(git_prompt_info)%{$fg[cyan]%}▶%{$reset_color%}'
+
+# With colored exit. http://www.lowlevelmanager.com/2012/03/smile-zsh-prompt-happysad-face.html
+#PROMPT='%{$fg[magenta]%}[%h][%T][%n@%m] %{$reset_color%}%{$fg[green]%}%15<..<%~%<< %{$reset_color%}$(git_prompt_info)%(?,%{$fg[cyan]%}▶%{$reset_color%},%{$fg[red]%}▶%{$reset_color%})'
+
+
+
+#PROMPT='%{$fg[magenta]%}[%h][%T] %{$reset_color%}%{$fg[green]%}%15<➥<%~%<< %{$reset_color%}$(git_prompt_info)%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%})'
+#RPROMPT='$(git_prompt_info)'
+# the prompt ’%10<...<%~%<<%# ’ will print a truncated representation of the current directory, followed by a ‘%’ or ‘#’, followed by a space. Without the ‘%<<’, those two characters would be included in the string to be truncated
+
