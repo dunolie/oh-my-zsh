@@ -4,7 +4,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
 
-alias ..='cd ..'
+#alias ..='cd ..'
 alias cd..='cd ..'
 alias cd...='cd ../..'
 alias cd....='cd ../../..'
@@ -38,6 +38,6 @@ cd () {
   fi
 }
 
-alias md='mkdir -p'
-alias rd=rmdir
-alias d='dirs -v | head -10'
+#alias md='mkdir -p'
+#alias rd=rmdir
+#alias d='dirs -v | head -10'
