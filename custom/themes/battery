@@ -1,0 +1,89 @@
+#!/bin/sh
+#based on https://raw.github.com/richoH/dotfiles/master/bin/battery
+#displays 100% when battery is full
+#hearts fill from the left rather than the right, video game style
+# http://engineering.korrelate.com/2012/07/18/mac-os-x-battery-status-in-terminal/
+
+# loaded via
+#(CUTE_BATTERY_INDICATOR=1 /usr/local/bin/battery Discharging; CUTE_BATTERY_INDICATOR=1 /usr/local/bin/battery Charging)
+
+#test function (to add to prompt)
+#prompt-bat (){
+#	CUTE_BATTERY_INDICATOR=1 
+#	~/bin/battery Discharging;
+#	CUTE_BATTERY_INDICATOR=1 
+#	~/bin/battery Charging
+#}
+
+HEART_FULL=♥
+HEART_EMPTY=♡
+[ -z "$NUM_HEARTS" ] &&
+    NUM_HEARTS=5
+
+cutinate()
+{
+    perc=$1
+    inc=$(( 100 / $NUM_HEARTS))
+
+
+    for i in `seq $NUM_HEARTS`; do
+        perc=$(( $perc - $inc ))
+        if [ $perc -ge 0 ]; then
+            echo $HEART_FULL
+        else
+            echo $HEART_EMPTY
+        fi
+    done
+}
+
+# Do with grep and awk unless too hard
+
+# TODO Identify which machine we're on from teh script.
+
+battery_status()
+{
+    case $1 in
+        "Discharging")
+            ext="No";;
+        "Charging")
+            ext="Yes";;
+    esac
+
+    ioreg -c AppleSmartBattery -w0 | \
+    grep -o '"[^"]*" = [^ ]*' | \
+    sed -e 's/= //g' -e 's/"//g' | \
+    sort | \
+    while read key value; do
+        case $key in
+            "MaxCapacity")
+                export maxcap=$value;;
+            "CurrentCapacity")
+                export curcap=$value;;
+            "ExternalConnected")
+                if [ "$ext" != "$value" ]; then
+                    exit
+                fi
+            ;;
+            "FullyCharged")
+                if [ "$value" = "Yes" ]; then
+                    export maxcap=1;
+                    export curcap=1;
+                    #exit
+                fi
+            ;;
+        esac
+        if [[ -n "$maxcap" && -n $curcap ]]; then
+            echo $(( 100 * $curcap / $maxcap ))
+            break
+        fi
+    done
+}
+
+BATTERY_STATUS=`battery_status$1`
+[ -z "$BATTERY_STATUS" ] && exit
+
+if [ -n "$CUTE_BATTERY_INDICATOR" ]; then
+    echo `cutinate $BATTERY_STATUS`
+else
+    echo ${BATTERY_STATUS}%
+fi
