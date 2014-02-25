@@ -7,6 +7,7 @@
 # battery: https://gist.github.com/gworley3/3136888
 
 autoload -U colors && colors
+<<<<<<< HEAD
 #COLOURED_RETURN_VAL="%(▪▶$fg{green}$fg{red})▪▶"
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
@@ -15,10 +16,24 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}☯%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}♺%{$fg[green]%}%{$reset_color%}"
 # Format for git_prompt_ahead()
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▶%{$reset_color%}"
+=======
+
+##ok for prompt ~ alignment issues with rprompt
+#COLOURED_RETURN_VAL="%(▪▶$fg{green}$fg{red})▪▶"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}♺"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}☯"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}♺"
+# Format for git_prompt_ahead()
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▶"
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[green]%})%{$reset_color%}"
+
+
 
 #-----------------------------------------
 # Example : With [user@host] for ssh connection
@@ -39,15 +54,27 @@ if [[ -z "$lappy" ]]; then
 	echo ""
 else
 	#use this RPROMPT for a laptop (with the battery script)
+<<<<<<< HEAD
 	#echo "$(CUTE_BATTERY_INDICATOR=1 ~/bin/battery Discharging;CUTE_BATTERY_INDICATOR=1 ~/bin/battery Charging);"
+=======
+	#echo "$(CUTE_BATTERY_INDICATOR=1 ~/bin/battery Discharging;CUTE_BATTERY_INDICATOR=1 ~/bin/battery Charging)"
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 	echo "$(~/bin/battery-prompt)"
 fi
 }
 
 #-----------------------------------------
 
+<<<<<<< HEAD
 PROMPT="%{$fg[magenta]%}[%h][%T]$(ssh_connection) %{$reset_color%}%{$fg[green]%}%20<➥<%~%<< %{$reset_color%}%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%}) "
 RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)%{$fg[magenta]%}${vim_mode}$(laptop_battery)%{$reset_color%}'
+=======
+PROMPT='%{$fg[magenta]%}[%h][%T]$(ssh_connection) %{$reset_color%}%{$fg[green]%}%20<➥<%~%<< %{$reset_color%}%(?,%{$fg[cyan]%}%(!.#.▶)%{$reset_color%},%{$fg[red]%}%(!.#.▶)%{$reset_color%}) '
+setopt promptsubst
+setopt promptpercent
+#RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)%{$fg[magenta]%}[$(~/bin/battery-prompt)%]'
+RPROMPT='$(git_prompt_info)$(git_prompt_short_sha)%{$fg[magenta]%}[$(laptop_battery)]%{$reset_color%}'
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 #PS2="%{$fg[cyan]%}▶ %{$reset_color%}"
 #-----------------------------------------
 # Example : check if your on a mac laptop  and then load battery script

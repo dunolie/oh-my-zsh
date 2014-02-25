@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vim : filetype=zsh
 # File: .zshrc
 # Author: dunolie ~ dunolie @ gmail * com
@@ -46,6 +47,12 @@ export GRAY='\033[1;30m'
 export L_GRAY='\033[0;37m'
 #=======================================
 #alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
+=======
+# vim: ft=zsh et
+# Tips 
+# http://www.rayninfo.co.uk/tips/zshtips.html
+
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 #=======================================
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -74,11 +81,19 @@ DISABLE_AUTO_UPDATE="true"
 #paths are coloured green
 #ZSH_HIGHLIGHT_STYLES[path]='fg=green'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 # To disable highlighting of globbing expressions
 #ZSH_HIGHLIGHT_STYLES[globbing]='none'
 
 # To differentiate aliases/functions from other command types
+<<<<<<< HEAD
 #ZSH_HIGHLIGHT_STYLES[etopt correct lias]='fg=magenta,bold'
+=======
+#ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 #ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
 
 #unknown are coloured yellow
@@ -101,13 +116,26 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+<<<<<<< HEAD
 plugins=(vi-mode ruby git brew vim github zsh-utilities comlpeat)
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
 
+=======
+plugins=(git brew vim last-working-dir github zsh-utilities)
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
+
+
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 #source $ZSH/custom/plugins/zsh-syntax-highlighting.zsh
 
 #source $ZSH/custom/functions/functions.zsh
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 # Customize to your needs...
 if [[ `uname` = "Darwin" ]]; then
 	if [[ -f /usr/local/bin/gls ]]; then
@@ -273,12 +301,17 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 #Set my Default Browser
 export BROWSER="open -a FireFox.app"
 
+<<<<<<< HEAD
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH            #brews & osx
+=======
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH            #brews
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 export PATH=${PATH}:~/bin:~/pbin                            #mine
 export PATH=${PATH}:/bin:/sbin:/usr/sbin:/usr/bin           #system
 export PATH=${PATH}:/usr/X11/bin:/opt/X11/bin               #x11
 export PATH=${PATH}:/usr/games:/usr/share/games             #games
 export PATH=${PATH}:/Developer/usr/bin:/Developer/usr/sbin  #dev
+<<<<<<< HEAD
 export PATH=${PATH}:/usr/local/mysql/bin                    #mysql (osx)
 #export PATH=${PATH}:~/.rmv/bin:~/.rvm/scripts               #ruby
 export PATH=${PATH}:/usr/local/share/npm/bin                #npm
@@ -287,17 +320,33 @@ export PATH=${PATH}:/usr/local/share/npm/bin                #npm
 #export PATH=/System/library/Frameworks/Ruby.framework/Versions/2.7/usr/bin:$PATH
 #export PATH=$PATH:/System/Library/Frameworks/Python.framework/Versions/Current/bin
 #export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin
+=======
+export PATH=$PATH}:/usr/local/mysql/bin                      #mysql (osx)
+#
+#export PATH=$PATH:/System/library/Frameworks/Ruby.framework/Versions/1.8/usr/bin
+#export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin
+#export PATH=$PATH:/System/Library/Frameworks/Python.framework/Versions/Current/bin
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 
 #
 # For non-root users, add the current directory to the search path:
 if [ ! "`id -u`" = "0" ]; then
+<<<<<<< HEAD
     PATH="$PATH:."
+=======
+ PATH="$PATH:."
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 fi
 #
 # my manual (man pages) paths
 export MANPATH=/usr/local/share/man:$MANPATH
+<<<<<<< HEAD
 export MANPATH=${MANPATH}:/opt/X11/share/man:/usr/local/man:/usr/share/man
 export MANPATH=${MANPATH}:/Developer/usr/share/man:/Developer/usr/X11/man:/usr/X11/man:~/Sync/Bash/man
+=======
+export MANPATH=${MANPATH}/opt/X11/share/man:/usr/local/man:/usr/share/man
+export MANPATH=${MANPATH}/Developer/usr/share/man:/Developer/usr/X11/man:/usr/X11/man:~/Sync/Bash/man
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 #
 
 #export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
@@ -309,6 +358,7 @@ export PERL5LIB="/System/Library/Perl/5.12:/System/Library/Perl/5.10:/Library/Pe
 # My perl paths installed via homebrew
 #export PERL5LIB="/Users/robbie/perl5/lib/perl5"
 #
+<<<<<<< HEAD
 # Make sure programs that want readline can find my configuration.
 export INPUTRC=~/.inputrc
 
@@ -377,10 +427,54 @@ zstyle ':completion:*:*:*:*:users' list-colors '=*=$color[green]=$color[red]'
 zstyle ':completion:*:messages' format $'%{\e[0;31m%}▶ %d%{\e[0m%}'
 zstyle ':completion:*:warnings' format $'%{\e[0;31m%}▶ No matches: %d%{\e[0m%}'
 }
+=======
+# Ruby Version manager  # get errors on loading
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Completion
+load_completion() {
+    # http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
+    # https://wiki.archlinux.org/index.php/Zsh
+    autoload -U compinit
+    fpath=($* $fpath)
+    fignore=(.DS_Store $fignore)
+    compinit -i
+    zmodload -i zsh/complist
+    setopt complete_in_word
+    setopt auto_remove_slash
+    unsetopt always_to_end
+    has_brew && compctl -K _gimme gimme
+    [[ -f ~/.ssh/known_hosts ]] && hosts=(`awk '{print $1}' ~/.ssh/known_hosts | tr ',' '\n' `)
+    [[ -f ~/.ssh/config ]] && hosts=($hosts `grep '^Host' ~/.ssh/config | sed s/Host\ // | egrep -v '^\*$'`)
+    zstyle ':completion:*' insert-tab pending
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+    #highlights='${PREFIX:+=(#bi)($PREFIX:t)(?)*==31=1;32}':${(s.:.)LS_COLORS}}
+    #highlights2='=(#bi) #([0-9]#) #([^ ]#) #([^ ]#) ##*($PREFIX)*==1;31=1;35=1;33=1;32=}'
+    #zstyle -e ':completion:*' list-colors 'if [[ $words[1] != kill && $words[1] != strace ]]; then reply=( "'$highlights'" ); else reply=( "'$highlights2'" ); fi'
+    ##unset highlights
+	# For autocompletion with an arrow-key driven interface
+	zstyle ':completion:*' menu select
+    zstyle ':completion:*' completer _complete _match _approximate
+    zstyle ':completion:*' squeeze-slashes true
+	zstyle ':completion:*' expand 'yes'
+    zstyle ':completion:*:match:*' original only
+    zstyle ':completion:*:approximate:*' max-errors 1 numeric
+    zstyle ':completion:*:hosts' hosts $hosts
+    zstyle ':completion::complete:*' use-cache 1
+    zstyle ':completion::complete:*' cache-path ./cache/
+    zstyle ':completion:*:cd:*' ignore-parents parent pwd
+	zstyle ':completion:*:mpg321:*' file-patterns '*.(mp3|MP3):mp3\ files *(-/):directories'
+    zstyle ':completion:*:ogg123:*' file-patterns '*.(ogg|OGG):ogg\ files *(-/):directories'
+    zstyle ':completion:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+    zstyle ':completion:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
+}
+setopt completealiases
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 # colors on tab complete, untill I get a handle on zsh/complist
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=40}:${(s.:.)LS_COLORS}")';
 export ZLS_COLORS=$LS_COLORS
 
+<<<<<<< HEAD
 # 'ctrl-x r' will complete the 12 last modified (mtime) files/directories
 zle -C newest-files complete-word _generic
 bindkey '^Xr' newest-files
@@ -403,6 +497,8 @@ zstyle ':completion:*:(ssh|scp|sftp):*' $knownhosts 2>/dev/null
 setopt completealiases
 #compdef pkill=kill
 #compdef pkill=killall
+=======
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 # Settings
 autoload colors; colors;
 load_defaults() {
@@ -434,6 +530,14 @@ load_defaults() {
     bindkey "${key[Up]}" history-search-backward
     bindkey "${key[Down]}" history-search-forward
 }
+<<<<<<< HEAD
+=======
+# bash completion settings (actually, these are readline settings)
+#bindkey "set completion-ignore-case on" # note: bind used instead of sticking these in .inputrc
+#bindkey "set bell-style none"
+#bindkey "set show-all-if-ambiguous on"
+#bindkey Space:magic-space
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 
 #bindkey '"\C-t": possible-completions' # replaces 'transpose-chars'
 #bindkey '"\M-t": menu-complete'        # replaces 'transpose-words'
@@ -443,6 +547,7 @@ bindkey "[C" forward-word
 bindkey "^[a" beginning-of-line
 bindkey "^[e" end-of-line
 
+<<<<<<< HEAD
 # Bind escape + number to last command variables.
 # 0 = Last, other numbers as is.
 bindkey -s '\e0' "!$"
@@ -548,3 +653,27 @@ bindkey -M vicmd '\eb'   backward-word                     # Alt-b
 bindkey -M vicmd '\ed'   kill-word                         # Alt-d
 bindkey -M vicmd '\e[5~' history-beginning-search-backward # PageUp
 bindkey -M vicmd '\e[6~' history-beginning-search-forward  # PageDown
+=======
+#alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
+#source ~/.zshrc
+
+#source $ZSH/oh-my-zsh.sh
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#  dpoggi  gianu  pygmalion  crunch
+#==================================================
+
+#source ~/.functions
+
+source  ~/.aliases_bash
+source ~/.aliases_bash_osx
+source ~/.aliases_bash_robbie
+source /usr/local/bin/z.sh
+source ~/.zprofile
+# from brew, for colorized output.
+source "`brew --prefix`/etc/grc.bashrc"
+# from brew 
+fpath=(/usr/local/share/zsh-completions $fpath)
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca

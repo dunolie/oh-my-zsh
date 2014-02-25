@@ -506,6 +506,8 @@ function cdfuz () {
 	[ $resetcase ] && shopt -u nocasematch
 }
 # ---------------------------------------------
+<<<<<<< HEAD
+=======
 
 function mdlocate () {
 	echo mdfind "kMDItemFSName == '$1'"
@@ -520,6 +522,68 @@ function clearquarantine () {
 	find "$1" -type f -print0 | xargs -n 100 -0 sudo xattr -d com.apple.quarantine
 }
 # ---------------------------------------------
+function yt () {
+	youtube-dl -o '/Volumes/Visual/YouTubes/New/%(uploader)s/%(title)s-%(id)s.%(ext)s' -f 22/35/34 --console-title --no-part --restrict-filenames --sub-format en "$@";
+	growlnotify -t "Youtube DL's Finished" -m "/Volumes/Visual/YouTubes/New"
+}
+
+# ---------------------------------------------
+# generate a password. ie: $ gp 64
+function gp () {
+    local l=$1
+    [ "$l" == "" ] && l=20
+    tr -dc A-Za-z0-9\-_~\!@#$%^\&*\(\)\\\`\+\[\{\]\}\|\;:\",\/?\= < /dev/urandom | head -c ${l} | xargs
+}
+
+
+function JPG-2-jpg () {
+	find $PWD -name '*.JPG' -exec bash -c 'mv "$1" "${1/%.JPG/.jpg}"' -- {} \;
+}
+# ---------------------------------------------
+function targpg () {
+for f in "$@"
+do
+dir=`dirname "${f}"`
+name=`basename "${f}"`
+cd "${dir}"
+# export GPGKEYID="123ZZ321" ~ for your .bashrc
+tar pcvf - "${name}" | gpg --encrypt --batch -z 6 -r robbie -o "${name}.tgz.gpg"
+done
+}
+
+# ---------------------------------------------
+# mktar - tarball wrapper
+# usage: mktar <filename | dirname>
+function mktar () {
+    tar pcvf "${1%%/}.tgz" "${1%%/}/"
+}
+# ---------------------------------------------
+
+# showTimes: show the modification, metadata-change, and access times of a file
+function show-times () {
+	stat -f "%N:   %m %c %a" "$@" ;
+}
+
+# finderComment: show the SpotLight comment for a file
+function finder-comment () {
+	mdls "$1" | grep kMDItemFinderComment ;
+}
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
+
+function mdlocate () {
+	echo mdfind "kMDItemFSName == '$1'"
+	mdfind "kMDItemFSName == '$1'"
+}
+
+function spot () { mdfind "kMDItemDisplayName == '$@'wc"; }
+
+function clearquarantine () {
+	[ "$1" -a -d "$1" ] || { echo need a directory argument; return 1; }
+	echo find "'$1'" -type f -print0 \| xargs -n 100 -0 sudo xattr -d com.apple.quarantine
+	find "$1" -type f -print0 | xargs -n 100 -0 sudo xattr -d com.apple.quarantine
+}
+# ---------------------------------------------
+<<<<<<< HEAD
 function yt () {
 	youtube-dl -o '/Volumes/Visual/YouTubes/New/%(uploader)s/%(title)s-%(id)s.%(ext)s' -f 22/35/34 --console-title --no-part --restrict-filenames --sub-format en "$@";
 	growlnotify -t "Youtube DL's Finished" -m "/Volumes/Visual/YouTubes/New"
@@ -620,6 +684,52 @@ function nicemount () {
 	(echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2="";1') | column -t ; 
 }
 
+=======
+# http://brettterpstra.com/2013/02/10/the-joy-of-sshfs/
+# Remote Mount (sshfs)
+# creates mount folder and mounts the remote filesystem
+rmount() {
+	local host folder mname
+	host="${1%%:*}:"
+	[[ ${1%:} == ${host%%:*} ]] && folder='' || folder=${1##*:}
+	if [[ -n $2 ]]; then
+		mname=$2
+	else
+		mname=${folder##*/}
+		[[ "$mname" == "" ]] && mname=${host%%:*}
+	fi
+	if [[ $(grep -i "host ${host%%:*}" ~/.ssh/config) != '' ]]; then
+		mkdir -p ~/Shell/mounts/$mname > /dev/null
+		sshfs $host$folder ~/Shell/mounts/$mname -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=$mname,noappledouble && echo "mounted ~/Shell/mounts/$mname"
+	else
+		echo "No entry found for ${host%%:*}"
+		return 1
+	fi
+}
+
+# Remote Umount, unmounts and deletes local folder (experimental, watch you step)
+rumount() {
+	if [[ $1 == "-a" ]]; then
+		ls -1 ~/Shell/mounts/|while read dir
+		do
+			[[ -d $(mount|grep "mounts/$dir") ]] && umount ~/Shell/mounts/$dir
+			[[ -d $(ls ~/Shell/mounts/$dir) ]] || rm -rf ~/Shell/mounts/$dir
+		done
+	else
+		[[ -d $(mount|grep "mounts/$1") ]] && umount ~/Shell/mounts/$1
+		[[ -d $(ls ~/Shell/mounts/$1) ]] || rm -rf ~/Shell/mounts/$1
+	fi
+}
+
+# -------------------------------------------------------------------
+# nice mount (http://catonmat.net/blog/anoth...
+# displays mounted drive information in a nicely formatted manner
+# -------------------------------------------------------------------
+function nicemount () { 
+	(echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2="";1') | column -t ; 
+}
+
+>>>>>>> e9e0e12b3880e15b6fb8ef7418e65a4aacf531ca
 function reload () {
 	if [[ $SHELL = /usr/local/bin/zsh ]]; then
 		echo -e "${CYAN}Reloading your ~/.zshrc!${NC}" ;source ~/.zshrc
